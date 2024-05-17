@@ -7,9 +7,7 @@ using UnityEngine.Audio;
 public class SceneCameraTrigger : MonoBehaviour
 {
     [SerializeField] private float transitionDuration = 2.5f;
-    [SerializeField] private AudioMixerGroup sfxGroup = null;
-    [SerializeField] private AudioMixerGroup musicGroup = null;
-    [SerializeField] private AudioMixerGroup specialMusicGroup = null;
+    [SerializeField] private AudioMixer audioMixer = null;
 
     private CinemachineVirtualCamera virtualCamera = null;
     private bool isActivated;
@@ -34,9 +32,9 @@ public class SceneCameraTrigger : MonoBehaviour
         while (Time.time <= transitionEndTime)
         {
             float t = (Time.time - transitionStartTime) / transitionDuration;
-            sfxGroup.audioMixer.SetFloat("VolSfx", Mathf.Lerp(-20, 0, 1f - t));
-            sfxGroup.audioMixer.SetFloat("VolMusic", Mathf.Lerp(-20, 0, 1f - t));
-            sfxGroup.audioMixer.SetFloat("VolMusicSpecial", Mathf.Lerp(-80, 0, t));
+            audioMixer.SetFloat("VolSfx", Mathf.Lerp(-20, 0, 1f - t));
+            audioMixer.SetFloat("VolMusic", Mathf.Lerp(-20, 0, 1f - t));
+            audioMixer.SetFloat("VolMusicSpecial", Mathf.Lerp(-80, 0, t));
             yield return null;
         }
 
@@ -48,9 +46,9 @@ public class SceneCameraTrigger : MonoBehaviour
         while (Time.time <= transitionEndTime)
         {
             float t = (Time.time - transitionStartTime) / transitionDuration;
-            sfxGroup.audioMixer.SetFloat("VolSfx", Mathf.Lerp(-20, 0, t));
-            sfxGroup.audioMixer.SetFloat("VolMusic", Mathf.Lerp(-20, 0, t));
-            sfxGroup.audioMixer.SetFloat("VolMusicSpecial", Mathf.Lerp(-80, 0, 1f - t));
+            audioMixer.SetFloat("VolSfx", Mathf.Lerp(-20, 0, t));
+            audioMixer.SetFloat("VolMusic", Mathf.Lerp(-20, 0, t));
+            audioMixer.SetFloat("VolMusicSpecial", Mathf.Lerp(-80, 0, 1f - t));
             yield return null;
         }
     }
