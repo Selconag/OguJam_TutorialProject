@@ -6,6 +6,7 @@ using UnityEngine.Audio;
 
 public class SceneCameraTrigger : MonoBehaviour
 {
+    [SerializeField] private float transitionDuration = 2.5f;
     [SerializeField] private AudioMixerGroup sfxGroup = null;
     [SerializeField] private AudioMixerGroup musicGroup = null;
     [SerializeField] private AudioMixerGroup specialMusicGroup = null;
@@ -28,29 +29,28 @@ public class SceneCameraTrigger : MonoBehaviour
         isActivated = true;
         virtualCamera.Priority = 90;
 
-        float countdown = 2.5f;
-        while (countdown > 0f)
+        float transitionStartTime = Time.time;
+        float transitionEndTime = Time.time + transitionDuration;
+        while (Time.time <= transitionEndTime)
         {
-            float t = countdown / 2.5f;
-            sfxGroup.audioMixer.SetFloat("VolSfx", Mathf.Lerp(-20, 0, t));
-            sfxGroup.audioMixer.SetFloat("VolMusic", Mathf.Lerp(-20, 0, t));
-            sfxGroup.audioMixer.SetFloat("VolMusicSpecial", Mathf.Lerp(-80, 0, 1f - t));
-            countdown -= Time.deltaTime;
+            float t = (Time.time - transitionStartTime) / transitionDuration;
+            sfxGroup.audioMixer.SetFloat("VolSfx", Mathf.Lerp(-20, 0, 1f - t));
+            sfxGroup.audioMixer.SetFloat("VolMusic", Mathf.Lerp(-20, 0, 1f - t));
+            sfxGroup.audioMixer.SetFloat("VolMusicSpecial", Mathf.Lerp(-80, 0, t));
             yield return null;
         }
 
         while (isActivated)
             yield return null;
 
-        countdown = 2.5f;
-        while (countdown > 0f)
+        transitionStartTime = Time.time;
+        transitionEndTime = Time.time + transitionDuration;
+        while (Time.time <= transitionEndTime)
         {
-            float t = countdown / 2.5f;
-            sfxGroup.audioMixer.SetFloat("VolSfx", Mathf.Lerp(-20, 0, 1f - t));
-            sfxGroup.audioMixer.SetFloat("VolMusic", Mathf.Lerp(-20, 0, 1f - t));
-            sfxGroup.audioMixer.SetFloat("VolMusicSpecial", Mathf.Lerp(-80, 0, t));
-
-            countdown -= Time.deltaTime;
+            float t = (Time.time - transitionStartTime) / transitionDuration;
+            sfxGroup.audioMixer.SetFloat("VolSfx", Mathf.Lerp(-20, 0, t));
+            sfxGroup.audioMixer.SetFloat("VolMusic", Mathf.Lerp(-20, 0, t));
+            sfxGroup.audioMixer.SetFloat("VolMusicSpecial", Mathf.Lerp(-80, 0, 1f - t));
             yield return null;
         }
     }

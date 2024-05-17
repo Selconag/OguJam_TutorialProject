@@ -7149,7 +7149,7 @@ Transform:
   m_GameObject: {fileID: 2023283973}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.03, y: 0.86, z: -10}
+  m_LocalPosition: {x: 1.08, y: 0.86, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7213,6 +7213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb3bd9a823c5aba43add7198388bf1da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  transitionDuration: 2.5
   sfxGroup: {fileID: 7326109019637169289, guid: 5c445415c00286a4e8a9daf1c748914e, type: 2}
   musicGroup: {fileID: 8585134430090425056, guid: 5c445415c00286a4e8a9daf1c748914e, type: 2}
   specialMusicGroup: {fileID: 8562785905135904731, guid: 5c445415c00286a4e8a9daf1c748914e, type: 2}
